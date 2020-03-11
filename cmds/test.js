@@ -10,11 +10,9 @@ module.exports = async (args) => {
         file = args.f || '1.cpp'
 
         fs.readFile(config.dir + titleSlug + '/' + file, "utf-8", async function(err, data) {
-            console.log(data)
-
-            await api.test(titleSlug, data)
-
-            spinner.stop()
+            api.test(titleSlug, data, function(){
+                spinner.stop()
+            })
         });
     } catch (err) {
         spinner.stop()
