@@ -9,8 +9,10 @@ module.exports = async (args) => {
         titleSlug = args._[1] || 'two-sum'
         file = args.f || '1.cpp'
 
+        const problem = await api.getProblem(titleSlug)
+
         fs.readFile(config.dir + titleSlug + '/' + file, "utf-8", async function(err, data) {
-            api.submit(titleSlug, data, function(){
+            api.submit(problem, data, function(){
                 spinner.stop()
             })
         });

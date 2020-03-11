@@ -19,7 +19,7 @@ function difficultyLevelToWords(level){
 }
 
 function viewProblemDetail(problem){
-    console.log('[' + problem.stat.question_id + ']' + '\t' + problem.stat.question__title + '\t' + difficultyLevelToWords(problem.difficulty.level))
+    console.log('[' + problem.stat.question_id + ']' + '\t' + problem.stat.question__title + '\t' +  problem.stat.question__title_slug + '\t' + difficultyLevelToWords(problem.difficulty.level))
 }
 
 module.exports = async (args) => {
