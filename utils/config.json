@@ -1,4 +1,5 @@
 {
+    "dir": "/home/sahil/Desktop/codes/",
     "urls": {
         "base": "https://leetcode.com",
         "problems": "https://leetcode.com/api/problems/$value",
@@ -15,10 +16,5 @@
         "submissions": "https://leetcode.com/api/submissions/$value",
         "submission": "https://leetcode.com/submissions/detail/$value/",
         "verify": "https://leetcode.com/submissions/detail/$value/check/"
-    },
-    "lang": [
-        "C++",
-        "Java",
-        "Python"
-    ]
+    }
 }

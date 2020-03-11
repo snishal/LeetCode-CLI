@@ -2,6 +2,7 @@ const ora = require('ora')
 const cheerio = require('cheerio')
 const fs = require('fs')
 const api = require('../utils/api')
+const config = require('../utils/config.json')
 
 function viewProblem(problem){
     console.log('[' + problem.questionId + '] ' + problem.title)
@@ -32,14 +33,22 @@ function getInfo(problem, lang){
     return obj
 }
 
-function createFile(title, file, ext, codeSnippet){
-    filePath = '/home/sahil/Desktop/leetcode/codes/' + title
-    fs.mkdirSync(filePath, { recursive: true }, (err) => {
-        if (err) console.log(err);
-        console.log('Folder Created')
-    });
+function createFile(title, file, ext, content){
+    if(!fs.existsSync(config.dir)){
+        fs.mkdirSync(config.dir, { recursive: true }, (err) => {
+            if (err) console.log(err);
+        });
+    }
 
-    fs.writeFile(filePath + '/' + file+'.'+ext, codeSnippet, function(e){
+    filePath = config.dir + title
+
+    if(!fs.existsSync(filePath)){
+        fs.mkdirSync(filePath, { recursive: true }, (err) => {
+            if (err) console.log(err);
+        });
+    }
+
+    fs.writeFile(filePath + '/' + file+'.'+ext, content, function(e){
         if(e) throw e
         console.log('Code File Created')
     })
@@ -61,7 +70,13 @@ module.exports = async (args) => {
 
         //refactor
         obj = getInfo(problem, lang)
-        createFile(problem.titleSlug, file, obj.langSlug, obj.code)
+        content = ''
+        if(args.q){
+            console.log('here')
+            content += '/*' + cheerio.load(problem.content).text() + '*/'
+        }
+        content += obj.code
+        createFile(problem.titleSlug, file, obj.langSlug, content)
 
     } catch (err) {
         spinner.stop()
