@@ -1,0 +1,24 @@
+{
+    "urls": {
+        "base": "https://leetcode.com",
+        "problems": "https://leetcode.com/api/problems/$value",
+        "problemsByTags": "https://leetcode.com/problems/api/tags/",
+        "problem": "https://leetcode.com/problems/$value/description/",
+        "filter": "https://leetcode.com/problems/api/filter-questions/$value",
+        "favorites": "https://leetcode.com/list/api/questions",
+        "graphql": "https://leetcode.com/graphql",
+        "login": "https://leetcode.com/accounts/login/",
+        "progress": "https://leetcode.com/api/progress/all/",
+        "test": "https://leetcode.com/problems/$value/interpret_solution/",
+        "session": "https://leetcode.com/session/",
+        "submit": "https://leetcode.com/problems/$value/submit/",
+        "submissions": "https://leetcode.com/api/submissions/$value",
+        "submission": "https://leetcode.com/submissions/detail/$value/",
+        "verify": "https://leetcode.com/submissions/detail/$value/check/"
+    },
+    "lang": [
+        "C++",
+        "Java",
+        "Python"
+    ]
+}
