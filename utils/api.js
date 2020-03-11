@@ -92,7 +92,7 @@ api.getProblem = async (titleSlug) => {
         } 
     })
 
-    return result.data.data.question.content
+    return result.data.data.question
 }
 
 api.test = async () => {
