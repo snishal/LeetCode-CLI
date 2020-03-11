@@ -73,7 +73,7 @@ module.exports = async (args) => {
         content = ''
         if(args.q){
             console.log('here')
-            content += '/*' + cheerio.load(problem.content).text() + '*/'
+            content += '/* \n' + cheerio.load(problem.content).text() + '*/ \n'
         }
         content += obj.code
         createFile(problem.titleSlug, file, obj.langSlug, content)
