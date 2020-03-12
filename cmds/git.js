@@ -22,7 +22,8 @@ module.exports = async (args) => {
                 console.log('adding files failed');
             });
 
-        simpleGitPromise.commit('Commit Message')
+        commitMessage = args.m || 'New Commit'
+        simpleGitPromise.commit(commitMessage)
         .then(
             (successCommit) => {
                 console.log(successCommit);
