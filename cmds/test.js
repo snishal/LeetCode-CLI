@@ -8,15 +8,14 @@ module.exports = async (args) => {
     try {
         titleSlug = args._[1] || 'two-sum'
         file = args.f || '1.cpp'
+        lang = args.l || 'cpp'
 
         const problem = await api.getProblem(titleSlug)
 
         problem.sampleTestCase = args.t || problem.sampleTestCase
 
-        console.log(problem.sampleTestCase)
-
         fs.readFile(config.dir + titleSlug + '/' + file, "utf-8", async function(err, data) {
-            api.test(problem, data, function(){
+            api.test(problem, data, lang, function(){
                 spinner.stop()
             })
         });
