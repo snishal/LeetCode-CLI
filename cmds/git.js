@@ -6,8 +6,13 @@ module.exports = async (args) => {
     const spinner = ora('Updating Git').start()
     try {
         if(args.i){
-            //git init and add remote origin
+            //add callbacks
+
+            simpleGitPromise.init()
+            simpleGitPromise.addRemote('origin', args.i)
         }
+
+        simpleGitPromise.pull('origin', 'master')
 
         simpleGitPromise.add('.')
             .then(
