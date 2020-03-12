@@ -12,6 +12,10 @@ module.exports = () => {
     }
 
     switch (cmd) {
+        case 'login':
+            require('./cmds/login')(argv)
+            break
+            
         case 'list':
             require('./cmds/list')(argv)
             break
@@ -32,6 +36,10 @@ module.exports = () => {
             require('./cmds/version')(argv)
             break
 
+        case 'git':
+            require('./cmds/git')(argv)
+            break
+            
         case 'help':
             require('./cmds/help')(argv)
             break
