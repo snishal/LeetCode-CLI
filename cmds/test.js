@@ -11,6 +11,10 @@ module.exports = async (args) => {
 
         const problem = await api.getProblem(titleSlug)
 
+        problem.sampleTestCase = args.t || problem.sampleTestCase
+
+        console.log(problem.sampleTestCase)
+
         fs.readFile(config.dir + titleSlug + '/' + file, "utf-8", async function(err, data) {
             api.test(problem, data, function(){
                 spinner.stop()
