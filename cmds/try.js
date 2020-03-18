@@ -54,7 +54,9 @@ function createFile(title, file, ext, content){
     })
 }
 
-module.exports = async (args) => {
+exports.command = 'try'
+exports.desc = 'View Problem'
+exports.handler = async (args) => {
     titleSlug = args._[1] || 'two-sum'
     
     const spinner = ora('Loading Question').start()

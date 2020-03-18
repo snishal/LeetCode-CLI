@@ -2,7 +2,9 @@ const ora = require("ora")
 const config = require('../utils/config.json')
 const simpleGitPromise = require('simple-git/promise')(config.dir)
 
-module.exports = async (args) => {
+exports.command = 'git'
+exports.desc = 'Push local Solutions to Github'
+exports.handler = async (args) => {
     const spinner = ora('Updating Git').start()
     try {
         if(args.i){

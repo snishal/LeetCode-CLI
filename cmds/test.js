@@ -3,7 +3,9 @@ const fs = require('fs')
 const api = require('../utils/api')
 const config = require('../utils/config.json')
 
-module.exports = async (args) => {
+exports.command = 'login'
+exports.desc = 'Test solution on LeetCode'
+exports.handler = async (args) => {
     const spinner = ora('Testing Question').start()
     try {
         titleSlug = args._[1] || 'two-sum'

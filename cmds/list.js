@@ -22,7 +22,9 @@ function viewProblemDetail(problem){
     console.log('[' + problem.stat.question_id + ']' + '\t' + problem.stat.question__title + '\t' +  problem.stat.question__title_slug + '\t' + difficultyLevelToWords(problem.difficulty.level))
 }
 
-module.exports = async (args) => {
+exports.command = 'list'
+exports.desc = 'List LeetCode Problems'
+exports.handler = async (args) => {
     const spinner = ora('Loading Questions').start()
     try {
         const problems = await api.getProblems()

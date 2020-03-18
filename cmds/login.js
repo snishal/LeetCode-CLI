@@ -25,7 +25,9 @@ function setCookies(cookies){
     })
 }
 
-module.exports = async (args) => {
+exports.command = 'login'
+exports.desc = 'Login into LeetCode'
+exports.handler = async (args) => {
     try {
         prompt.start();
 
