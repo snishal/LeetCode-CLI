@@ -27,7 +27,7 @@ function viewProblem(problem){
 function getInfo(problem, lang){
     obj = null
     problem.codeSnippets.forEach(element => {
-        if(element.lang == lang){
+        if(element.langSlug == lang){
             obj = element
         }
     })
@@ -67,7 +67,7 @@ exports.builder = function(yargs) {
             .option('l', {
                 alias:    'lang',
                 type:     'string',
-                default: 'C++',
+                default: 'cpp',
                 describe: 'Language to Code'
             })
             .option('f', {
@@ -87,8 +87,7 @@ exports.builder = function(yargs) {
                 default:  '',
                 describe: 'Fetch Question by Title',
             })
-            .example(chalk.yellow('leetcode list two-sum'), 'View Question detail')
-            .example(chalk.yellow('leetcode list two-sum -l Python3 -f test.py -q'), 'Create file with Question Description')
+            .example(chalk.yellow('leetcode try two-sum -l Python3 -f test.py -q'), 'Create file with Question Description')
 }
 exports.handler = async (args) => {
     titleSlug = args.problem || 'two-sum'
@@ -101,7 +100,7 @@ exports.handler = async (args) => {
 
         viewProblem(problem)
 
-        lang = args.l || 'C++'
+        lang = args.l || 'cpp'
         file = args.f || 'sol.cpp'
 
         //refactor

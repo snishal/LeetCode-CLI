@@ -154,14 +154,13 @@ api.test = async (problem, code, lang, callback) => {
             })
 
             if(result.data.state == 'SUCCESS' || result.data.state == 'FAILURE'){
-                console.log(result.data)
                 clearInterval(verify)
-                callback()
+                callback(result.data)
             }
 
         }, 3000)
     }catch(e){
-        console.log(e)
+        throw Error(e)
     }
 }
 
