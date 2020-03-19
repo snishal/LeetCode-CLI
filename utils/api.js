@@ -28,7 +28,7 @@ api.login = async (username, password) => {
 
         return browserCookies
     }catch(e){
-        console.error(e)
+        throw Error(e)
     }
 }
 
@@ -197,14 +197,13 @@ api.submit = async (problem, code, lang, callback) => {
             })
 
             if(result.data.state == 'SUCCESS'){
-                console.log(result.data)
                 clearInterval(verify)
-                callback()
+                callback(result.data)
             }
 
         }, 1000)
     }catch(e){
-        console.log(e)
+        throw Error(e)
     }
 }
 

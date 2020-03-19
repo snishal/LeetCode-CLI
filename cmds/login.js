@@ -20,7 +20,7 @@ function setCookies(cookies){
 
     fs.writeFile(process.env.HOME + '/.leetcode/cookies.json', JSON.stringify(reqCookies), function(e){
         if(e){
-            console.error(e)
+            throw Error(e)
         }else{
             console.log('Cookies Updated')
         }
@@ -45,23 +45,22 @@ exports.handler = async (args) => {
             }], async function (err, result) {
                 
                 if(err){
-                    throw err
+                    throw Error(err)
                 }else{
                     const spinner = ora('Logging In').start()
                     try{
                         cookies = await api.login(result.username, result.password)
                         
+                        spinner.stop()
+
                         setCookies(cookies)
-                        
-                        spinner.stop()
                     }catch(e){
-                        spinner.stop()
-                        console.error(e)
+                        throw Error(e)
                     }
                 }
         });
     } catch (err) {
         spinner.stop()
-        console.error(err)
+        console.error(chalk.redBright.bold('Ran into some error! Try Again.'))
     }
 }
