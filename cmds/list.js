@@ -1,7 +1,7 @@
 const ora = require('ora')
-const api = require('../utils/api')
 const chalk = require('chalk')
-var Table = require('cli-table3');
+var Table = require('cli-table3')
+const api = require('../utils/api')
 
 function difficultyLevelToWords(level){
     difficulty = null
@@ -42,7 +42,7 @@ exports.builder = function(yargs) {
         possible: ['algorithms', 'shell', 'database', 'concurrency']
       })
       .example(chalk.yellow('leetcode list shell'), 'List questions that belong to "shell" category')
-  }
+}
 exports.handler = async (args) => {
     const spinner = ora('Loading Questions').start()
     try {

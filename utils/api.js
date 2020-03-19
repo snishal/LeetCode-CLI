@@ -121,7 +121,7 @@ api.getProblem = async (titleSlug) => {
 
         return result.data.data.question
     }catch(e){
-        console.log(e)
+        throw Error(e)
     }
 }
 
