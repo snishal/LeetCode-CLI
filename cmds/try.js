@@ -33,7 +33,7 @@ function getInfo(problem, lang){
     return obj
 }
 
-function createFile(title, file, ext, content){
+function createFile(title, file, content){
     if(!fs.existsSync(config.dir)){
         fs.mkdirSync(config.dir, { recursive: true }, (err) => {
             if (err) console.log(err);
@@ -48,16 +48,20 @@ function createFile(title, file, ext, content){
         });
     }
 
-    fs.writeFile(filePath + '/' + file+'.'+ext, content, function(e){
-        if(e) throw e
-        console.log('Code File Created')
+    fs.writeFile(filePath + '/' + file, content, function(e){
+        if(e){
+            console.log(e)
+        }else{
+            console.log('Code File Created')
+        }
     })
 }
 
-exports.command = 'try'
+exports.command = 'try <problem>'
 exports.desc = 'View Problem'
+exports.aliases = ['pick', 'view']
 exports.handler = async (args) => {
-    titleSlug = args._[1] || 'two-sum'
+    titleSlug = args.problem || 'two-sum'
     
     const spinner = ora('Loading Question').start()
     try {
@@ -68,7 +72,7 @@ exports.handler = async (args) => {
         viewProblem(problem)
 
         lang = args.l || 'C++'
-        file = args.f || '1'
+        file = args.f || '1.cpp'
 
         //refactor
         obj = getInfo(problem, lang)
@@ -78,7 +82,7 @@ exports.handler = async (args) => {
             content += '/* \n' + cheerio.load(problem.content).text() + '*/ \n'
         }
         content += obj.code
-        createFile(problem.titleSlug, file, obj.langSlug, content)
+        createFile(problem.titleSlug, file, content)
 
     } catch (err) {
         spinner.stop()

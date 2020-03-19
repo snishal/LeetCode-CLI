@@ -3,7 +3,7 @@ const fs = require('fs')
 const api = require('../utils/api')
 const config = require('../utils/config.json')
 
-exports.command = 'login'
+exports.command = 'test'
 exports.desc = 'Test solution on LeetCode'
 exports.handler = async (args) => {
     const spinner = ora('Testing Question').start()

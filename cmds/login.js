@@ -4,7 +4,6 @@ const fs = require('fs')
 const api = require('../utils/api')
 
 function setCookies(cookies){
-
     var reqCookies = {
         csrftoken: "",
         session: ""
@@ -19,9 +18,12 @@ function setCookies(cookies){
         }
     });
 
-    fs.writeFile('utils/cookies.json', JSON.stringify(reqCookies), function(e){
-        if(e) throw e
-        console.log('Cookies Updated')
+    fs.writeFile(process.env.HOME + '/.leetcode/cookies.json', JSON.stringify(reqCookies), function(e){
+        if(e){
+            console.error(e)
+        }else{
+            console.log('Cookies Updated')
+        }
     })
 }
 
@@ -41,14 +43,22 @@ exports.handler = async (args) => {
                 return true;
             }
             }], async function (err, result) {
-    
-                const spinner = ora('Logging In').start()
                 
-                cookies = await api.login(result.username, result.password)
-
-                setCookies(cookies)
-
-                spinner.stop()
+                if(err){
+                    throw err
+                }else{
+                    const spinner = ora('Logging In').start()
+                    try{
+                        cookies = await api.login(result.username, result.password)
+                        
+                        setCookies(cookies)
+                        
+                        spinner.stop()
+                    }catch(e){
+                        spinner.stop()
+                        console.error(e)
+                    }
+                }
         });
     } catch (err) {
         spinner.stop()
