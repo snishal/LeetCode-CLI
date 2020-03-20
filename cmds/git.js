@@ -1,15 +1,30 @@
 const ora = require("ora")
+const chalk = require("chalk")
 const config = require('../utils/config.json')
 const simpleGitPromise = require('simple-git/promise')(config.dir)
 
 exports.command = 'git'
 exports.desc = 'Push local Solutions to Github'
+exports.builder = function(yargs) {
+    return yargs
+            .option('m', {
+                alias: 'message',
+                type:     'string',
+                default: 'New Commit',
+                describe: 'Message with new commit'
+            })
+            .option('i', {
+                type:     'boolean',
+                default: 'false',
+                describe: 'Origin to Github repo'
+            })
+            .example(chalk.yellow('leetcode git -m "Two-Sum"'), 'Push new commit with message')
+}
 exports.handler = async (args) => {
     const spinner = ora('Updating Git').start()
     try {
-        if(args.i){
+        if(args.i === true){
             //add callbacks
-
             simpleGitPromise.init()
             simpleGitPromise.addRemote('origin', args.i)
         }
@@ -19,25 +34,25 @@ exports.handler = async (args) => {
         simpleGitPromise.add('.')
             .then(
             (addSuccess) => {
-                console.log(addSuccess);
+                // console.log(addSuccess);
             }, (failedAdd) => {
-                console.log('adding files failed');
+                throw Error(failedAdd)
             });
 
         commitMessage = args.m || 'New Commit'
         simpleGitPromise.commit(commitMessage)
         .then(
             (successCommit) => {
-                console.log(successCommit);
+                // console.log(successCommit);
             }, (failed) => {
-                console.log('failed commmit');
+                throw Error(failed)
         });
         
         simpleGitPromise.push('origin','master')
             .then((success) => {
-            console.log('repo successfully pushed');
+            console.log('Repo successfully pushed');
             },(failed)=> {
-            console.log('repo push failed');
+                throw Error(failed)
         });
 
         spinner.stop()
