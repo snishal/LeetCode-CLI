@@ -36,7 +36,7 @@ exports.handler = async (args) => {
 
         const problem = await api.getProblem(titleSlug)
 
-        fs.readFile(config.dir + titleSlug + '/' + file, "utf-8", async function(err, data) {
+        fs.readFile(process.env.HOME + '/Desktop/codes' + titleSlug + '/' + file, "utf-8", async function(err, data) {
             if(err)throw Error(err)
             api.submit(problem, data, lang, function(response){
                 spinner.stop()

@@ -1,5 +1,5 @@
+
 {
-    "dir": "/home/sahil/Desktop/codes/",
     "urls": {
         "base": "https://leetcode.com",
         "problems": "https://leetcode.com/api/problems/$value",

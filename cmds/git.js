@@ -1,7 +1,7 @@
 const ora = require("ora")
 const chalk = require("chalk")
 const config = require('../utils/config.json')
-const simpleGitPromise = require('simple-git/promise')(config.dir)
+const simpleGitPromise = require('simple-git/promise')(process.env.HOME + '/Desktop/codes')
 
 exports.command = 'git'
 exports.desc = 'Push local Solutions to Github'
