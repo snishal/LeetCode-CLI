@@ -44,7 +44,7 @@ exports.handler = async (args) => {
 
         problem.sampleTestCase = args.t || problem.sampleTestCase
 
-        fs.readFile(process.env.HOME + '/Desktop/codes' + titleSlug + '/' + file, "utf-8", async function(err, data) {
+        fs.readFile(process.env.HOME + '/Desktop/codes/' + titleSlug + '/' + file, "utf-8", async function(err, data) {
             if(err)throw Error(err)
             api.test(problem, data, lang, function(response){
                 spinner.stop()

@@ -36,13 +36,13 @@ function getInfo(problem, lang){
 }
 
 function createFile(title, file, content){
-    if(!fs.existsSync(process.env.HOME + '/Desktop/codes')){
-        fs.mkdirSync(process.env.HOME + '/Desktop/codes', { recursive: true }, (err) => {
+    if(!fs.existsSync(process.env.HOME + '/Desktop/codes/')){
+        fs.mkdirSync(process.env.HOME + '/Desktop/codes/', { recursive: true }, (err) => {
             if (err) throw Error(e)
         });
     }
 
-    filePath = process.env.HOME + '/Desktop/codes' + title
+    filePath = process.env.HOME + '/Desktop/codes/' + title
 
     if(!fs.existsSync(filePath)){
         fs.mkdirSync(filePath, { recursive: true }, (err) => {
